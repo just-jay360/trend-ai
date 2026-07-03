@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindWell - Mental Health Platform</title>
+    <style>
+        :root {
+            --primary: #4CAF50;
+            --primary-dark: #2E7D32;
+            --danger: #f44336;
+            --warning: #ff9800;
+            --info: #2196F3;
+            --bg: #f0f4f8;
+            --card: #ffffff;
+            --text: #333;
+            --light: #999;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); min-height: 100vh; }
+        
+        .header {
+            background: linear-gradient(135deg, #1a237e, #4CAF50);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 { font-size: 28px; }
+        .header p { font-size: 14px; opacity: 0.9; margin-top: 5px; }
+        
+        .nav {
+            background: white;
+            padding: 12px 20px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            background: #f0f0f0;
+            transition: all 0.3s;
+        }
+        .nav button:hover { background: #e0e0e0; }
+        .nav button.active { background: var(--primary); color: white; }
+        .nav button.danger { background: var(--danger); color: white; }
+        
+        .container { max-width: 900px; margin: 20px auto; padding: 0 15px; }
+        
+        .card {
+            background: var(--card);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .card h2 { margin-bottom: 15px; color: var(--text); font-size: 20px; }
+        .card h3 { margin: 15px 0 10px; color: #555; }
+        
+        .form-group { margin-bottom: 15px; }
+        .form-group label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 13px; color: #555; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 10px;
+            font-size: 14px; outline: none; transition: all 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary); box-shadow: 0 0 0 3px rgba(76,175,80,0.1);
+        }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .form-row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; }
+        
+        .btn {
+            padding: 12px 25px; border: none; border-radius: 25px; cursor: pointer;
+            font-size: 15px; font-weight: 600; width: 100%; transition: all 0.3s;
+        }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: var(--primary-dark); }
+        .btn-info { background: var(--info); color: white; }
+        .btn-warning { background: var(--warning); color: white; }
+        .btn-danger { background: var(--danger); color: white; }
+        
+        .mood-selector { display: flex; justify-content: space-around; margin: 15px 0; gap: 5px; }
+        .mood-option {
+            text-align: center; cursor: pointer; padding: 12px 8px; border-radius: 12px;
+            border: 2px solid transparent; transition: all 0.3s; flex: 1;
+        }
+        .mood-option:hover { background: #f5f5f5; }
+        .mood-option.selected { background: #e8f5e9; border-color: var(--primary); transform: scale(1.05); }
+        .mood-option .emoji { font-size: 35px; display: block; }
+        .mood-option .label { font-size: 10px; color: #666; margin-top: 4px; display: block; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 15px 0; }
+        .stat-card {
+            padding: 18px; border-radius: 12px; text-align: center; color: white;
+        }
+        .stat-card.green { background: linear-gradient(135deg, #4CAF50, #2E7D32); }
+        .stat-card.red { background: linear-gradient(135deg, #f44336, #c62828); }
+        .stat-card.orange { background: linear-gradient(135deg, #ff9800, #e65100); }
+        .stat-card.blue { background: linear-gradient(135deg, #2196F3, #1565C0); }
+        .stat-card.purple { background: linear-gradient(135deg, #9C27B0, #6A1B9A); }
+        .stat-value { font-size: 28px; font-weight: bold; }
+        .stat-label { font-size: 11px; opacity: 0.9; margin-top: 4px; }
+        
+        .alert {
+            padding: 15px; border-radius: 10px; margin-bottom: 15px; font-size: 14px;
+        }
+        .alert-success { background: #e8f5e9; color: #2e7d32; border: 1px solid #4caf50; }
+        .alert-error { background: #ffebee; color: #c62828; border: 1px solid #ef5350; }
+        .alert-warning { background: #fff3e0; color: #e65100; border: 1px solid #ff9800; }
+        .alert-info { background: #e3f2fd; color: #1565C0; border: 1px solid #2196F3; }
+        .alert-danger { background: #fff5f5; color: #b71c1c; border: 2px solid #f44336; font-weight: 600; }
+        
+        .hidden { display: none !important; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; font-size: 13px; }
+        th { background: #f9f9f9; font-weight: 600; }
+        
+        .badge { padding: 4px 10px; border-radius: 15px; font-size: 11px; font-weight: 600; }
+        .badge-good { background: #e8f5e9; color: #2e7d32; }
+        .badge-ok { background: #fff3e0; color: #e65100; }
+        .badge-bad { background: #ffebee; color: #c62828; }
+        .badge-crisis { background: #f44336; color: white; }
+        
+        .resource-card {
+            padding: 15px; border: 1px solid #e0e0e0; border-radius: 10px; margin-bottom: 10px;
+            cursor: pointer; transition: all 0.3s;
+        }
+        .resource-card:hover { border-color: var(--primary); background: #f9fdf9; }
+        .resource-card h4 { margin-bottom: 5px; color: var(--text); }
+        .resource-card p { font-size: 13px; color: #666; }
+        
+        .crisis-banner {
+            background: #f44336; color: white; padding: 20px; border-radius: 12px;
+            margin-bottom: 20px; text-align: center;
+        }
+        .crisis-banner h3 { color: white; margin-bottom: 10px; }
+        .crisis-banner p { margin: 5px 0; }
+        .crisis-banner .hotline { font-size: 24px; font-weight: bold; margin: 10px 0; }
+        
+        .section-divider {
+            border-top: 2px solid #e0e0e0; margin: 20px 0; padding-top: 15px;
+        }
+        
+        .range-group { display: flex; align-items: center; gap: 10px; }
+        .range-group input[type="range"] { flex: 1; }
+        .range-group span { min-width: 30px; text-align: center; font-weight: 600; }
+        
+        @media (max-width: 600px) {
+            .form-row, .form-row-3 { grid-template-columns: 1fr; }
+            .mood-selector { flex-wrap: wrap; }
+            .nav { justify-content: center; }
+            .nav button { font-size: 11px; padding: 8px 12px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧠 MindWell</h1>
+        <p>Mental Health Assessment & Support Platform</p>
+    </div>
+    
+    <div class="nav" id="nav">
+        <button onclick="showPage('login')" id="navLogin">🔑 Login</button>
+        <button onclick="showPage('register')" id="navRegister">📝 Register</button>
+        <button onclick="showPage('mood')" id="navMood" class="hidden">😊 Log Mood</button>
+        <button onclick="showPage('history')" id="navHistory" class="hidden">📊 History</button>
+        <button onclick="showPage('report')" id="navReport" class="hidden">📋 Report</button>
+        <button onclick="showPage('resources')" id="navResources" class="hidden">📚 Resources</button>
+        <button onclick="logout()" id="navLogout" class="hidden danger">🚪 Logout</button>
+    </div>
+    
+    <div class="container">
+        <div id="alertBox"></div>
+        
+        <!-- ========== LOGIN PAGE ========== -->
+        <div id="pageLogin" class="page">
+            <div class="card">
+                <h2>🔑 Welcome Back</h2>
+                <form onsubmit="login(event)">
+                    <div class="form-group"><label>Email</label><input type="email" id="loginEmail" required placeholder="your@email.com"></div>
+                    <div class="form-group"><label>Password</label><input type="password" id="loginPassword" required placeholder="Enter password"></div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+                <p style="text-align:center;margin-top:12px;color:#999;font-size:12px;">Demo: demo@mindwell.com / password123</p>
+            </div>
+        </div>
+        
+        <!-- ========== REGISTER PAGE ========== -->
+        <div id="pageRegister" class="page hidden">
+            <div class="card">
+                <h2>📝 Create Account</h2>
+                <form onsubmit="register(event)">
+                    <div class="form-row">
+                        <div class="form-group"><label>Full Name *</label><input type="text" id="regName" required></div>
+                        <div class="form-group"><label>Email *</label><input type="email" id="regEmail" required></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Password *</label><input type="password" id="regPassword" required minlength="6"></div>
+                        <div class="form-group"><label>Age</label><input type="number" id="regAge" min="13" max="120"></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Gender</label><select id="regGender"><option value="">Select</option><option>Male</option><option>Female</option><option>Other</option></select></div>
+                        <div class="form-group"><label>Role</label><select id="regRole"><option value="">Select</option><option>Student</option><option>Employee</option><option>Therapist</option><option>Wellness Officer</option></select></div>
+                    </div>
+                    <div class="form-group"><label>Institution</label><input type="text" id="regInstitution" placeholder="University or Company"></div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- ========== MOOD TRACKER PAGE ========== -->
+        <div id="pageMood" class="page hidden">
+            <div class="card">
+                <h2>😊 How are you feeling today?</h2>
+                
+                <!-- Mood Emoji Selector -->
+                <div class="mood-selector">
+                    <div class="mood-option" onclick="selectMood(1,this)"><span class="emoji">😢</span><span class="label">Very Sad</span></div>
+                    <div class="mood-option" onclick="selectMood(3,this)"><span class="emoji">😔</span><span class="label">Sad</span></div>
+                    <div class="mood-option" onclick="selectMood(5,this)"><span class="emoji">😐</span><span class="label">Neutral</span></div>
+                    <div class="mood-option selected" onclick="selectMood(7,this)"><span class="emoji">😊</span><span class="label">Good</span></div>
+                    <div class="mood-option" onclick="selectMood(9,this)"><span class="emoji">😄</span><span class="label">Great</span></div>
+                </div>
+                <input type="hidden" id="moodScore" value="7">
+                
+                <form onsubmit="logMood(event)">
+                    <h3>📊 Clinical Metrics (Optional but recommended)</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Depression Level: <span id="depVal">5</span>/10</label>
+                            <input type="range" id="depressionScore" min="1" max="10" value="5" oninput="document.getElementById('depVal').textContent=this.value">
+                        </div>
+                        <div class="form-group">
+                            <label>Anxiety Level: <span id="anxVal">5</span>/10</label>
+                            <input type="range" id="anxietyScore" min="1" max="10" value="5" oninput="document.getElementById('anxVal').textContent=this.value">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Stress Level: <span id="strVal">5</span>/10</label>
+                            <input type="range" id="stressScore" min="1" max="10" value="5" oninput="document.getElementById('strVal').textContent=this.value">
+                        </div>
+                        <div class="form-group">
+                            <label>Energy Level: <span id="enVal">5</span>/10</label>
+                            <input type="range" id="energyLevel" min="1" max="10" value="5" oninput="document.getElementById('enVal').textContent=this.value">
+                        </div>
+                    </div>
+                    <div class="form-row-3">
+                        <div class="form-group"><label>Sleep (hours)</label><input type="number" id="sleepHours" value="7" min="0" max="24" step="0.5"></div>
+                        <div class="form-group"><label>Sleep Quality</label><select id="sleepQuality"><option value="5">Average</option><option value="1">Very Poor</option><option value="2">Poor</option><option value="3">Fair</option><option value="4">Good</option><option value="5" selected>Average</option></select></div>
+                        <div class="form-group"><label>Social Interaction</label><select id="socialInteraction"><option value="5">Average</option><option value="1">None</option><option value="2">Minimal</option><option value="3">Some</option><option value="4">Moderate</option><option value="5" selected>Average</option></select></div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group"><label>Context</label><select id="context"><option value="home">🏠 Home</option><option value="studying">📚 Studying</option><option value="working">💼 Working</option><option value="social">👥 Social</option></select></div>
+                        <div class="form-group"><label>Appetite</label><select id="appetite"><option value="5">Normal</option><option value="1">Very Poor</option><option value="3">Reduced</option><option value="5" selected>Normal</option></select></div>
+                    </div>
+                    <div class="form-group"><label>Notes</label><textarea id="moodNote" rows="2" placeholder="How's your day going? Any thoughts to note?"></textarea></div>
+                    <button type="submit" class="btn btn-primary">💾 Log Mood & Get Assessment</button>
+                </form>
+                
+                <!-- Assessment Result -->
+                <div id="assessmentResult" class="hidden" style="margin-top:20px;"></div>
+            </div>
+        </div>
+        
+        <!-- ========== HISTORY PAGE ========== -->
+        <div id="pageHistory" class="page hidden">
+            <div class="card">
+                <h2>📊 Your Mood History</h2>
+                <div class="stats-grid" id="historyStats"></div>
+                <div id="historyTable"></div>
+            </div>
+        </div>
+        
+        <!-- ========== MENTAL HEALTH REPORT PAGE ========== -->
+        <div id="pageReport" class="page hidden">
+            <div class="card">
+                <h2>📋 Mental Health Assessment Report</h2>
+                <button class="btn btn-info" onclick="loadReport()" style="margin-bottom:15px;">🔄 Generate Report</button>
+                <div id="reportContent">
+                    <p style="color:#999;text-align:center;">Click "Generate Report" to view your mental health assessment</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ========== RESOURCES PAGE ========== -->
+        <div id="pageResources" class="page hidden">
+            <div class="card">
+                <h2>📚 Wellness Resources</h2>
+                
+                <!-- Crisis Resources (always visible) -->
+                <div class="crisis-banner">
+                    <h3>🚨 CRISIS SUPPORT</h3>
+                    <p>If you're in crisis or having thoughts of self-harm:</p>
+                    <div class="hotline">📞 112</div>
+                    <p>Suicide & Crisis Lifeline (NG)</p>
+                    <p>Text HELP to +234-806-210-6493</p>
+                    <p style="margin-top:8px;">You are not alone. Help is available 24/7.</p>
+                </div>
+                
+                <div id="resourcesList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ============ STATE ============
+        let token = localStorage.getItem('mindwell_token') || null;
+        let currentUser = JSON.parse(localStorage.getItem('mindwell_user') || 'null');
+        let selectedMoodScore = 7;
+        
+        // ============ INIT ============
+        window.onload = function() {
+            if (token && currentUser) {
+                updateNav(true);
+                showPage('mood');
+            } else {
+                updateNav(false);
+                showPage('login');
+            }
+        };
+        
+        // ============ NAVIGATION ============
+        function showPage(page) {
+            document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+            const el = document.getElementById('page' + page.charAt(0).toUpperCase() + page.slice(1));
+            if (el) el.classList.remove('hidden');
+            if (page === 'history') loadHistory();
+            if (page === 'resources') loadResources();
+            document.getElementById('alertBox').innerHTML = '';
+        }
+        
+        function updateNav(loggedIn) {
+            ['navLogin','navRegister'].forEach(id => document.getElementById(id).classList.toggle('hidden', loggedIn));
+            ['navMood','navHistory','navReport','navResources','navLogout'].forEach(id => document.getElementById(id).classList.toggle('hidden', !loggedIn));
+        }
+        
+        function showAlert(msg, type='success') {
+            document.getElementById('alertBox').innerHTML = `<div class="alert alert-${type}">${msg}</div>`;
+            setTimeout(() => document.getElementById('alertBox').innerHTML = '', 5000);
+        }
+        
+        // ============ AUTH ============
+        async function register(e) {
+            e.preventDefault();
+            const data = {
+                fullName: document.getElementById('regName').value,
+                email: document.getElementById('regEmail').value,
+                password: document.getElementById('regPassword').value,
+                age: parseInt(document.getElementById('regAge').value) || null,
+                gender: document.getElementById('regGender').value,
+                institution: document.getElementById('regInstitution').value,
+                role: document.getElementById('regRole').value
+            };
+            try {
+                const res = await fetch('/api/auth/register', {
+                    method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)
+                });
+                const result = await res.json();
+                if (res.ok) {
+                    token = result.token; currentUser = result.user;
+                    localStorage.setItem('mindwell_token', token);
+                    localStorage.setItem('mindwell_user', JSON.stringify(currentUser));
+                    updateNav(true); showAlert('✅ Registered! Welcome!'); showPage('mood');
+                } else {
+                    showAlert(result.message || 'Registration failed', 'error');
+                }
+            } catch(e) { showAlert('Connection error. Is server running?', 'error'); }
+        }
+        
+        async function login(e) {
+            e.preventDefault();
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST', headers: {'Content-Type':'application/json'},
+                    body: JSON.stringify({ email: document.getElementById('loginEmail').value, password: document.getElementById('loginPassword').value })
+                });
+                const result = await res.json();
+                if (res.ok) {
+                    token = result.token; currentUser = result.user;
+                    localStorage.setItem('mindwell_token', token);
+                    localStorage.setItem('mindwell_user', JSON.stringify(currentUser));
+                    updateNav(true); showAlert('✅ Logged in!'); showPage('mood');
+                } else {
+                    showAlert(result.message || 'Login failed', 'error');
+                }
+            } catch(e) { showAlert('Connection error', 'error'); }
+        }
+        
+        function logout() {
+            token = null; currentUser = null;
+            localStorage.removeItem('mindwell_token');
+            localStorage.removeItem('mindwell_user');
+            updateNav(false); showPage('login');
+        }
+        
+        // ============ MOOD ============
+        function selectMood(score, el) {
+            selectedMoodScore = score;
+            document.getElementById('moodScore').value = score;
+            document.querySelectorAll('.mood-option').forEach(o => o.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+        
+        async function logMood(e) {
+            e.preventDefault();
+            const data = {
+                score: selectedMoodScore,
+                depressionScore: parseInt(document.getElementById('depressionScore').value),
+                anxietyScore: parseInt(document.getElementById('anxietyScore').value),
+                stressScore: parseInt(document.getElementById('stressScore').value),
+                energyLevel: parseInt(document.getElementById('energyLevel').value),
+                sleepHours: parseFloat(document.getElementById('sleepHours').value),
+                sleepQuality: parseInt(document.getElementById('sleepQuality').value),
+                appetite: parseInt(document.getElementById('appetite').value),
+                concentration: 5,
+                socialInteraction: parseInt(document.getElementById('socialInteraction').value),
+                context: document.getElementById('context').value,
+                tags: [],
+                note: document.getElementById('moodNote').value
+            };
+            
+            try {
+                const res = await fetch('/api/mood', {
+                    method: 'POST',
+                    headers: {'Content-Type':'application/json', 'Authorization':`Bearer ${token}`},
+                    body: JSON.stringify(data)
+                });
+                const result = await res.json();
+                
+                if (res.ok) {
+                    showAlert('✅ Mood logged! Assessment complete.');
+                    
+                    // Show assessment
+                    let assessmentHTML = '<div class="section-divider"><h3>📊 Your Assessment</h3></div>';
+                    
+                    if (result.crisis && result.crisis.detected) {
+                        assessmentHTML += `<div class="alert alert-danger">⚠️ ${result.crisis.message}<br>Please reach out for support. Call 112 for immediate help.</div>`;
+                    }
+                    
+                    if (result.recommendations && result.recommendations.length > 0) {
+                        assessmentHTML += '<h4>💡 Recommendations</h4>';
+                        result.recommendations.forEach(r => {
+                            assessmentHTML += `<div class="alert alert-info"><strong>${r.title}</strong><br>${r.description}</div>`;
+                        });
+                    }
+                    
+                    assessmentHTML += `<p style="margin-top:10px;"><a href="#" onclick="showPage('report');return false;" style="color:#2196F3;">📋 View Full Mental Health Report →</a></p>`;
+                    
+                    document.getElementById('assessmentResult').innerHTML = assessmentHTML;
+                    document.getElementById('assessmentResult').classList.remove('hidden');
+                    document.getElementById('moodNote').value = '';
+                    
+                } else {
+                    showAlert('Error: ' + (result.message || 'Unknown error'), 'error');
+                }
+            } catch(e) {
+                showAlert('Connection error: ' + e.message, 'error');
+            }
+        }
+        
+        // ============ HISTORY ============
+        async function loadHistory() {
+            try {
+                const [moodsRes, statsRes] = await Promise.all([
+                    fetch('/api/mood?days=30', {headers:{'Authorization':`Bearer ${token}`}}),
+                    fetch('/api/mood/stats', {headers:{'Authorization':`Bearer ${token}`}})
+                ]);
+                const moodsData = await moodsRes.json();
+                const statsData = await statsRes.json();
+                const s = statsData.stats || {};
+                
+                document.getElementById('historyStats').innerHTML = `
+                    <div class="stat-card green"><div class="stat-value">${s.avgMood||'0'}</div><div class="stat-label">Avg Mood</div></div>
+                    <div class="stat-card orange"><div class="stat-value">${s.avgAnxiety||'0'}</div><div class="stat-label">Avg Anxiety</div></div>
+                    <div class="stat-card red"><div class="stat-value">${s.avgDepression||'0'}</div><div class="stat-label">Avg Depression</div></div>
+                    <div class="stat-card blue"><div class="stat-value">${s.avgSleep||'0'}h</div><div class="stat-label">Avg Sleep</div></div>
+                    <div class="stat-card purple"><div class="stat-value">${s.total||0}</div><div class="stat-label">Total Entries</div></div>
+                `;
+                
+                if (moodsData.moods && moodsData.moods.length > 0) {
+                    let html = '<table><tr><th>Date</th><th>Mood</th><th>Depression</th><th>Anxiety</th><th>Stress</th><th>Sleep</th><th>Context</th></tr>';
+                    moodsData.moods.forEach(m => {
+                        const b = m.score>=7?'badge-good':m.score>=4?'badge-ok':'badge-bad';
+                        html += `<tr>
+                            <td>${new Date(m.createdAt).toLocaleDateString()}</td>
+                            <td><span class="badge ${b}">${m.score}/10</span></td>
+                            <td>${m.depressionScore||'-'}</td><td>${m.anxietyScore||'-'}</td>
+                            <td>${m.stressScore||'-'}</td><td>${m.sleepHours||'-'}h</td><td>${m.context||'-'}</td>
+                        </tr>`;
+                    });
+                    html += '</table>';
+                    document.getElementById('historyTable').innerHTML = html;
+                } else {
+                    document.getElementById('historyTable').innerHTML = '<p style="text-align:center;color:#999;padding:30px;">No mood entries yet.</p>';
+                }
+            } catch(e) {
+                document.getElementById('historyTable').innerHTML = '<p style="color:red;">Error loading history</p>';
+            }
+        }
+        
+        // ============ REPORT ============
+        async function loadReport() {
+            try {
+                const res = await fetch('/api/reports/mental-health', {
+                    headers: {'Authorization':`Bearer ${token}`}
+                });
+                const data = await res.json();
+                const r = data.report;
+                
+                document.getElementById('reportContent').innerHTML = `
+                    <div class="alert alert-info"><strong>Report Generated:</strong> ${new Date(r.generatedAt).toLocaleString()}</div>
+                    
+                    <h3>👤 Patient: ${r.user.name}</h3>
+                    <p>Age: ${r.user.age || 'N/A'} | Institution: ${r.user.institution || 'N/A'}</p>
+                    
+                    <div class="stats-grid" style="margin-top:15px;">
+                        <div class="stat-card green"><div class="stat-value">${r.summary.averageMood}</div><div class="stat-label">Avg Mood</div></div>
+                        <div class="stat-card ${r.summary.depressionRisk==='high'?'red':'orange'}"><div class="stat-value">${r.summary.depressionRisk.toUpperCase()}</div><div class="stat-label">Depression Risk</div></div>
+                        <div class="stat-card ${r.summary.anxietyRisk==='high'?'red':'blue'}"><div class="stat-value">${r.summary.anxietyRisk.toUpperCase()}</div><div class="stat-label">Anxiety Risk</div></div>
+                        <div class="stat-card purple"><div class="stat-value">${r.summary.trend.toUpperCase()}</div><div class="stat-label">Mood Trend</div></div>
+                    </div>
+                    
+                    <h3>📊 Detailed Statistics</h3>
+                    <table>
+                        <tr><td>Total Entries</td><td><strong>${r.statistics.total}</strong></td></tr>
+                        <tr><td>Average Mood</td><td><strong>${r.statistics.avgMood}/10</strong></td></tr>
+                        <tr><td>Average Depression</td><td><strong>${r.statistics.avgDepression}/10</strong></td></tr>
+                        <tr><td>Average Anxiety</td><td><strong>${r.statistics.avgAnxiety}/10</strong></td></tr>
+                        <tr><td>Average Stress</td><td><strong>${r.statistics.avgStress}/10</strong></td></tr>
+                        <tr><td>Average Sleep</td><td><strong>${r.statistics.avgSleep}h</strong></td></tr>
+                        <tr><td>Average Social Interaction</td><td><strong>${r.statistics.avgSocial}/10</strong></td></tr>
+                        <tr><td>Crisis Alerts</td><td><strong style="color:${r.summary.crisisAlerts>0?'red':'green'}">${r.summary.crisisAlerts}</strong></td></tr>
+                    </table>
+                    
+                    <div class="alert ${r.summary.trend==='declining'?'alert-warning':'alert-success'}" style="margin-top:15px;">
+                        <strong>Assessment:</strong> ${r.resources.message}
+                    </div>
+                    
+                    ${r.activeRecommendations && r.activeRecommendations.length > 0 ? `
+                        <h3>💡 Active Recommendations</h3>
+                        ${r.activeRecommendations.map(rec => `
+                            <div class="alert alert-info"><strong>${rec.title}</strong><br>${rec.description}</div>
+                        `).join('')}
+                    ` : ''}
+                    
+                    <div class="crisis-banner" style="margin-top:15px;">
+                        <strong>📞 Crisis Resources:</strong> ${r.resources.crisis}
+                    </div>
+                `;
+            } catch(e) {
+                document.getElementById('reportContent').innerHTML = '<p style="color:red;">Error loading report. Have you logged any moods?</p>';
+            }
+        }
+        
+        // ============ RESOURCES ============
+        async function loadResources() {
+            try {
+                const res = await fetch('/api/mood/resources', {
+                    headers: {'Authorization':`Bearer ${token}`}
+                });
+                const data = await res.json();
+                
+                if (data.resources && data.resources.length > 0) {
+                    let html = '';
+                    data.resources.forEach(r => {
+                        html += `
+                            <div class="resource-card" onclick="this.querySelector('.content').classList.toggle('hidden')">
+                                <h4>${r.title}</h4>
+                                <p>${r.description} | ⏱️ ${r.duration} min | Type: ${r.type}</p>
+                                <div class="content hidden" style="margin-top:10px;padding:10px;background:#f9f9f9;border-radius:8px;white-space:pre-line;">${r.content}</div>
+                            </div>
+                        `;
+                    });
+                    document.getElementById('resourcesList').innerHTML = html;
+                } else {
+                    document.getElementById('resourcesList').innerHTML = '<p>No resources available.</p>';
+                }
+            } catch(e) {
+                document.getElementById('resourcesList').innerHTML = '<p style="color:red;">Error loading resources</p>';
+            }
+        }
+    </script>
+</body>
+</html>
