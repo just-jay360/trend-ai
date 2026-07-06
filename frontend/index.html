@@ -21,33 +21,19 @@
         
         .header {
             background: linear-gradient(135deg, #1a237e, #4CAF50);
-            color: white;
-            padding: 20px;
-            text-align: center;
+            color: white; padding: 20px; text-align: center;
         }
         .header h1 { font-size: 28px; }
         .header p { font-size: 14px; opacity: 0.9; margin-top: 5px; }
         
         .nav {
-            background: white;
-            padding: 12px 20px;
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            background: white; padding: 12px 20px; display: flex; gap: 8px;
+            flex-wrap: wrap; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky; top: 0; z-index: 100;
         }
         .nav button {
-            padding: 10px 18px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            background: #f0f0f0;
-            transition: all 0.3s;
+            padding: 10px 18px; border: none; border-radius: 25px; cursor: pointer;
+            font-size: 13px; font-weight: 600; background: #f0f0f0; transition: all 0.3s;
         }
         .nav button:hover { background: #e0e0e0; }
         .nav button.active { background: var(--primary); color: white; }
@@ -56,11 +42,8 @@
         .container { max-width: 900px; margin: 20px auto; padding: 0 15px; }
         
         .card {
-            background: var(--card);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            background: var(--card); border-radius: 15px; padding: 25px;
+            margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);
         }
         .card h2 { margin-bottom: 15px; color: var(--text); font-size: 20px; }
         .card h3 { margin: 15px 0 10px; color: #555; }
@@ -84,8 +67,6 @@
         .btn-primary { background: var(--primary); color: white; }
         .btn-primary:hover { background: var(--primary-dark); }
         .btn-info { background: var(--info); color: white; }
-        .btn-warning { background: var(--warning); color: white; }
-        .btn-danger { background: var(--danger); color: white; }
         
         .mood-selector { display: flex; justify-content: space-around; margin: 15px 0; gap: 5px; }
         .mood-option {
@@ -98,9 +79,7 @@
         .mood-option .label { font-size: 10px; color: #666; margin-top: 4px; display: block; }
         
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 15px 0; }
-        .stat-card {
-            padding: 18px; border-radius: 12px; text-align: center; color: white;
-        }
+        .stat-card { padding: 18px; border-radius: 12px; text-align: center; color: white; }
         .stat-card.green { background: linear-gradient(135deg, #4CAF50, #2E7D32); }
         .stat-card.red { background: linear-gradient(135deg, #f44336, #c62828); }
         .stat-card.orange { background: linear-gradient(135deg, #ff9800, #e65100); }
@@ -109,9 +88,7 @@
         .stat-value { font-size: 28px; font-weight: bold; }
         .stat-label { font-size: 11px; opacity: 0.9; margin-top: 4px; }
         
-        .alert {
-            padding: 15px; border-radius: 10px; margin-bottom: 15px; font-size: 14px;
-        }
+        .alert { padding: 15px; border-radius: 10px; margin-bottom: 15px; font-size: 14px; }
         .alert-success { background: #e8f5e9; color: #2e7d32; border: 1px solid #4caf50; }
         .alert-error { background: #ffebee; color: #c62828; border: 1px solid #ef5350; }
         .alert-warning { background: #fff3e0; color: #e65100; border: 1px solid #ff9800; }
@@ -128,14 +105,13 @@
         .badge-good { background: #e8f5e9; color: #2e7d32; }
         .badge-ok { background: #fff3e0; color: #e65100; }
         .badge-bad { background: #ffebee; color: #c62828; }
-        .badge-crisis { background: #f44336; color: white; }
         
         .resource-card {
             padding: 15px; border: 1px solid #e0e0e0; border-radius: 10px; margin-bottom: 10px;
             cursor: pointer; transition: all 0.3s;
         }
         .resource-card:hover { border-color: var(--primary); background: #f9fdf9; }
-        .resource-card h4 { margin-bottom: 5px; color: var(--text); }
+        .resource-card h4 { margin-bottom: 5px; }
         .resource-card p { font-size: 13px; color: #666; }
         
         .crisis-banner {
@@ -143,16 +119,9 @@
             margin-bottom: 20px; text-align: center;
         }
         .crisis-banner h3 { color: white; margin-bottom: 10px; }
-        .crisis-banner p { margin: 5px 0; }
         .crisis-banner .hotline { font-size: 24px; font-weight: bold; margin: 10px 0; }
         
-        .section-divider {
-            border-top: 2px solid #e0e0e0; margin: 20px 0; padding-top: 15px;
-        }
-        
-        .range-group { display: flex; align-items: center; gap: 10px; }
-        .range-group input[type="range"] { flex: 1; }
-        .range-group span { min-width: 30px; text-align: center; font-weight: 600; }
+        .section-divider { border-top: 2px solid #e0e0e0; margin: 20px 0; padding-top: 15px; }
         
         @media (max-width: 600px) {
             .form-row, .form-row-3 { grid-template-columns: 1fr; }
@@ -181,7 +150,7 @@
     <div class="container">
         <div id="alertBox"></div>
         
-        <!-- ========== LOGIN PAGE ========== -->
+        <!-- LOGIN PAGE -->
         <div id="pageLogin" class="page">
             <div class="card">
                 <h2>🔑 Welcome Back</h2>
@@ -194,7 +163,7 @@
             </div>
         </div>
         
-        <!-- ========== REGISTER PAGE ========== -->
+        <!-- REGISTER PAGE -->
         <div id="pageRegister" class="page hidden">
             <div class="card">
                 <h2>📝 Create Account</h2>
@@ -217,12 +186,11 @@
             </div>
         </div>
         
-        <!-- ========== MOOD TRACKER PAGE ========== -->
+        <!-- MOOD TRACKER PAGE -->
         <div id="pageMood" class="page hidden">
             <div class="card">
                 <h2>😊 How are you feeling today?</h2>
                 
-                <!-- Mood Emoji Selector -->
                 <div class="mood-selector">
                     <div class="mood-option" onclick="selectMood(1,this)"><span class="emoji">😢</span><span class="label">Very Sad</span></div>
                     <div class="mood-option" onclick="selectMood(3,this)"><span class="emoji">😔</span><span class="label">Sad</span></div>
@@ -233,7 +201,7 @@
                 <input type="hidden" id="moodScore" value="7">
                 
                 <form onsubmit="logMood(event)">
-                    <h3>📊 Clinical Metrics (Optional but recommended)</h3>
+                    <h3>📊 Clinical Metrics (Optional)</h3>
                     <div class="form-row">
                         <div class="form-group">
                             <label>Depression Level: <span id="depVal">5</span>/10</label>
@@ -256,23 +224,21 @@
                     </div>
                     <div class="form-row-3">
                         <div class="form-group"><label>Sleep (hours)</label><input type="number" id="sleepHours" value="7" min="0" max="24" step="0.5"></div>
-                        <div class="form-group"><label>Sleep Quality</label><select id="sleepQuality"><option value="5">Average</option><option value="1">Very Poor</option><option value="2">Poor</option><option value="3">Fair</option><option value="4">Good</option><option value="5" selected>Average</option></select></div>
-                        <div class="form-group"><label>Social Interaction</label><select id="socialInteraction"><option value="5">Average</option><option value="1">None</option><option value="2">Minimal</option><option value="3">Some</option><option value="4">Moderate</option><option value="5" selected>Average</option></select></div>
+                        <div class="form-group"><label>Sleep Quality</label><select id="sleepQuality"><option value="1">Very Poor</option><option value="2">Poor</option><option value="3">Fair</option><option value="4">Good</option><option value="5" selected>Average</option></select></div>
+                        <div class="form-group"><label>Social Interaction</label><select id="socialInteraction"><option value="1">None</option><option value="2">Minimal</option><option value="3">Some</option><option value="4">Moderate</option><option value="5" selected>Average</option></select></div>
                     </div>
                     <div class="form-row">
                         <div class="form-group"><label>Context</label><select id="context"><option value="home">🏠 Home</option><option value="studying">📚 Studying</option><option value="working">💼 Working</option><option value="social">👥 Social</option></select></div>
-                        <div class="form-group"><label>Appetite</label><select id="appetite"><option value="5">Normal</option><option value="1">Very Poor</option><option value="3">Reduced</option><option value="5" selected>Normal</option></select></div>
+                        <div class="form-group"><label>Appetite</label><select id="appetite"><option value="1">Very Poor</option><option value="3">Reduced</option><option value="5" selected>Normal</option></select></div>
                     </div>
-                    <div class="form-group"><label>Notes</label><textarea id="moodNote" rows="2" placeholder="How's your day going? Any thoughts to note?"></textarea></div>
+                    <div class="form-group"><label>Notes</label><textarea id="moodNote" rows="2" placeholder="How's your day going?"></textarea></div>
                     <button type="submit" class="btn btn-primary">💾 Log Mood & Get Assessment</button>
                 </form>
-                
-                <!-- Assessment Result -->
                 <div id="assessmentResult" class="hidden" style="margin-top:20px;"></div>
             </div>
         </div>
         
-        <!-- ========== HISTORY PAGE ========== -->
+        <!-- HISTORY PAGE -->
         <div id="pageHistory" class="page hidden">
             <div class="card">
                 <h2>📊 Your Mood History</h2>
@@ -281,7 +247,7 @@
             </div>
         </div>
         
-        <!-- ========== MENTAL HEALTH REPORT PAGE ========== -->
+        <!-- REPORT PAGE -->
         <div id="pageReport" class="page hidden">
             <div class="card">
                 <h2>📋 Mental Health Assessment Report</h2>
@@ -292,27 +258,64 @@
             </div>
         </div>
         
-        <!-- ========== RESOURCES PAGE ========== -->
+        <!-- RESOURCES PAGE -->
         <div id="pageResources" class="page hidden">
             <div class="card">
                 <h2>📚 Wellness Resources</h2>
-                
-                <!-- Crisis Resources (always visible) -->
                 <div class="crisis-banner">
                     <h3>🚨 CRISIS SUPPORT</h3>
                     <p>If you're in crisis or having thoughts of self-harm:</p>
-                    <div class="hotline">📞 112</div>
-                    <p>Suicide & Crisis Lifeline (NG)</p>
-                    <p>Text HELP to +234-806-210-6493</p>
+                    <div class="hotline">📞 988</div>
+                    <p>Suicide & Crisis Lifeline (US)</p>
+                    <p>Text HOME to 741741</p>
                     <p style="margin-top:8px;">You are not alone. Help is available 24/7.</p>
                 </div>
-                
                 <div id="resourcesList"></div>
             </div>
         </div>
     </div>
 
     <script>
+        // ============ CONFIGURATION ============
+        // AUTOMATICALLY DETECT API URL
+        const API_URL = (window.location.port === '5500' || window.location.port === '5501' || window.location.hostname === '127.0.0.1')
+            ? 'http://localhost:5000'  // Live Server → use backend port
+            : '';  // Same origin → use relative URLs
+        
+        console.log('🔗 API URL:', API_URL || '(same origin)');
+        console.log('📍 Current location:', window.location.href);
+        
+        // ============ HELPER: API CALL ============
+        async function apiCall(endpoint, options = {}) {
+            const url = API_URL + endpoint;
+            const token = localStorage.getItem('mindwell_token');
+            
+            const config = {
+                ...options,
+                headers: {
+                    'Content-Type': 'application/json',
+                    ...(token && { 'Authorization': `Bearer ${token}` }),
+                    ...options.headers
+                }
+            };
+            
+            console.log('📡 API Call:', options.method || 'GET', url);
+            
+            try {
+                const response = await fetch(url, config);
+                const data = await response.json();
+                
+                if (!response.ok) {
+                    throw new Error(data.message || 'Request failed');
+                }
+                
+                return { ok: true, data };
+            } catch (error) {
+                console.error('❌ API Error:', error.message);
+                return { ok: false, error: error.message };
+            }
+        }
+        
         // ============ STATE ============
         let token = localStorage.getItem('mindwell_token') || null;
         let currentUser = JSON.parse(localStorage.getItem('mindwell_user') || 'null');
@@ -320,6 +323,7 @@
         
         // ============ INIT ============
         window.onload = function() {
+            console.log('🚀 App initialized');
             if (token && currentUser) {
                 updateNav(true);
                 showPage('mood');
@@ -361,46 +365,57 @@
                 institution: document.getElementById('regInstitution').value,
                 role: document.getElementById('regRole').value
             };
-            try {
-                const res = await fetch('/api/auth/register', {
-                    method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)
-                });
-                const result = await res.json();
-                if (res.ok) {
-                    token = result.token; currentUser = result.user;
-                    localStorage.setItem('mindwell_token', token);
-                    localStorage.setItem('mindwell_user', JSON.stringify(currentUser));
-                    updateNav(true); showAlert('✅ Registered! Welcome!'); showPage('mood');
-                } else {
-                    showAlert(result.message || 'Registration failed', 'error');
-                }
-            } catch(e) { showAlert('Connection error. Is server running?', 'error'); }
+            
+            const result = await apiCall('/api/auth/register', {
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+            
+            if (result.ok) {
+                token = result.data.token;
+                currentUser = result.data.user;
+                localStorage.setItem('mindwell_token', token);
+                localStorage.setItem('mindwell_user', JSON.stringify(currentUser));
+                updateNav(true);
+                showAlert('✅ Registered! Welcome!');
+                showPage('mood');
+            } else {
+                showAlert(result.error || 'Registration failed', 'error');
+            }
         }
         
         async function login(e) {
             e.preventDefault();
-            try {
-                const res = await fetch('/api/auth/login', {
-                    method: 'POST', headers: {'Content-Type':'application/json'},
-                    body: JSON.stringify({ email: document.getElementById('loginEmail').value, password: document.getElementById('loginPassword').value })
-                });
-                const result = await res.json();
-                if (res.ok) {
-                    token = result.token; currentUser = result.user;
-                    localStorage.setItem('mindwell_token', token);
-                    localStorage.setItem('mindwell_user', JSON.stringify(currentUser));
-                    updateNav(true); showAlert('✅ Logged in!'); showPage('mood');
-                } else {
-                    showAlert(result.message || 'Login failed', 'error');
-                }
-            } catch(e) { showAlert('Connection error', 'error'); }
+            const data = {
+                email: document.getElementById('loginEmail').value,
+                password: document.getElementById('loginPassword').value
+            };
+            
+            const result = await apiCall('/api/auth/login', {
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+            
+            if (result.ok) {
+                token = result.data.token;
+                currentUser = result.data.user;
+                localStorage.setItem('mindwell_token', token);
+                localStorage.setItem('mindwell_user', JSON.stringify(currentUser));
+                updateNav(true);
+                showAlert('✅ Logged in!');
+                showPage('mood');
+            } else {
+                showAlert(result.error || 'Login failed', 'error');
+            }
         }
         
         function logout() {
-            token = null; currentUser = null;
+            token = null;
+            currentUser = null;
             localStorage.removeItem('mindwell_token');
             localStorage.removeItem('mindwell_user');
-            updateNav(false); showPage('login');
+            updateNav(false);
+            showPage('login');
         }
         
         // ============ MOOD ============
@@ -429,55 +444,46 @@
                 note: document.getElementById('moodNote').value
             };
             
-            try {
-                const res = await fetch('/api/mood', {
-                    method: 'POST',
-                    headers: {'Content-Type':'application/json', 'Authorization':`Bearer ${token}`},
-                    body: JSON.stringify(data)
-                });
-                const result = await res.json();
+            const result = await apiCall('/api/mood', {
+                method: 'POST',
+                body: JSON.stringify(data)
+            });
+            
+            if (result.ok) {
+                showAlert('✅ Mood logged! Assessment complete.');
                 
-                if (res.ok) {
-                    showAlert('✅ Mood logged! Assessment complete.');
-                    
-                    // Show assessment
-                    let assessmentHTML = '<div class="section-divider"><h3>📊 Your Assessment</h3></div>';
-                    
-                    if (result.crisis && result.crisis.detected) {
-                        assessmentHTML += `<div class="alert alert-danger">⚠️ ${result.crisis.message}<br>Please reach out for support. Call 112 for immediate help.</div>`;
-                    }
-                    
-                    if (result.recommendations && result.recommendations.length > 0) {
-                        assessmentHTML += '<h4>💡 Recommendations</h4>';
-                        result.recommendations.forEach(r => {
-                            assessmentHTML += `<div class="alert alert-info"><strong>${r.title}</strong><br>${r.description}</div>`;
-                        });
-                    }
-                    
-                    assessmentHTML += `<p style="margin-top:10px;"><a href="#" onclick="showPage('report');return false;" style="color:#2196F3;">📋 View Full Mental Health Report →</a></p>`;
-                    
-                    document.getElementById('assessmentResult').innerHTML = assessmentHTML;
-                    document.getElementById('assessmentResult').classList.remove('hidden');
-                    document.getElementById('moodNote').value = '';
-                    
-                } else {
-                    showAlert('Error: ' + (result.message || 'Unknown error'), 'error');
+                let assessmentHTML = '<div class="section-divider"><h3>📊 Your Assessment</h3></div>';
+                
+                if (result.data.crisis && result.data.crisis.detected) {
+                    assessmentHTML += `<div class="alert alert-danger">⚠️ ${result.data.crisis.message}<br>Please reach out for support. Call 988 for immediate help.</div>`;
                 }
-            } catch(e) {
-                showAlert('Connection error: ' + e.message, 'error');
+                
+                if (result.data.recommendations && result.data.recommendations.length > 0) {
+                    assessmentHTML += '<h4>💡 Recommendations</h4>';
+                    result.data.recommendations.forEach(r => {
+                        assessmentHTML += `<div class="alert alert-info"><strong>${r.title}</strong><br>${r.desc || r.description}</div>`;
+                    });
+                }
+                
+                assessmentHTML += `<p style="margin-top:10px;"><a href="#" onclick="showPage('report');return false;" style="color:#2196F3;">📋 View Full Mental Health Report →</a></p>`;
+                
+                document.getElementById('assessmentResult').innerHTML = assessmentHTML;
+                document.getElementById('assessmentResult').classList.remove('hidden');
+                document.getElementById('moodNote').value = '';
+            } else {
+                showAlert('Error: ' + (result.error || 'Unknown error'), 'error');
             }
         }
         
         // ============ HISTORY ============
         async function loadHistory() {
-            try {
-                const [moodsRes, statsRes] = await Promise.all([
-                    fetch('/api/mood?days=30', {headers:{'Authorization':`Bearer ${token}`}}),
-                    fetch('/api/mood/stats', {headers:{'Authorization':`Bearer ${token}`}})
-                ]);
-                const moodsData = await moodsRes.json();
-                const statsData = await statsRes.json();
-                const s = statsData.stats || {};
+            const [moodsResult, statsResult] = await Promise.all([
+                apiCall('/api/mood?days=30'),
+                apiCall('/api/mood/stats')
+            ]);
+            
+            if (moodsResult.ok && statsResult.ok) {
+                const s = statsResult.data.stats || {};
                 
                 document.getElementById('historyStats').innerHTML = `
                     <div class="stat-card green"><div class="stat-value">${s.avgMood||'0'}</div><div class="stat-label">Avg Mood</div></div>
@@ -487,9 +493,9 @@
                     <div class="stat-card purple"><div class="stat-value">${s.total||0}</div><div class="stat-label">Total Entries</div></div>
                 `;
                 
-                if (moodsData.moods && moodsData.moods.length > 0) {
+                if (moodsResult.data.moods && moodsResult.data.moods.length > 0) {
                     let html = '<table><tr><th>Date</th><th>Mood</th><th>Depression</th><th>Anxiety</th><th>Stress</th><th>Sleep</th><th>Context</th></tr>';
-                    moodsData.moods.forEach(m => {
+                    moodsResult.data.moods.forEach(m => {
                         const b = m.score>=7?'badge-good':m.score>=4?'badge-ok':'badge-bad';
                         html += `<tr>
                             <td>${new Date(m.createdAt).toLocaleDateString()}</td>
@@ -503,23 +509,20 @@
                 } else {
                     document.getElementById('historyTable').innerHTML = '<p style="text-align:center;color:#999;padding:30px;">No mood entries yet.</p>';
                 }
-            } catch(e) {
-                document.getElementById('historyTable').innerHTML = '<p style="color:red;">Error loading history</p>';
+            } else {
+                document.getElementById('historyTable').innerHTML = '<p style="color:red;">Error loading history. Is the backend running?</p>';
             }
         }
         
         // ============ REPORT ============
         async function loadReport() {
-            try {
-                const res = await fetch('/api/reports/mental-health', {
-                    headers: {'Authorization':`Bearer ${token}`}
-                });
-                const data = await res.json();
-                const r = data.report;
+            const result = await apiCall('/api/reports/mental-health');
+            
+            if (result.ok) {
+                const r = result.data.report;
                 
                 document.getElementById('reportContent').innerHTML = `
                     <div class="alert alert-info"><strong>Report Generated:</strong> ${new Date(r.generatedAt).toLocaleString()}</div>
-                    
                     <h3>👤 Patient: ${r.user.name}</h3>
                     <p>Age: ${r.user.age || 'N/A'} | Institution: ${r.user.institution || 'N/A'}</p>
                     
@@ -538,7 +541,6 @@
                         <tr><td>Average Anxiety</td><td><strong>${r.statistics.avgAnxiety}/10</strong></td></tr>
                         <tr><td>Average Stress</td><td><strong>${r.statistics.avgStress}/10</strong></td></tr>
                         <tr><td>Average Sleep</td><td><strong>${r.statistics.avgSleep}h</strong></td></tr>
-                        <tr><td>Average Social Interaction</td><td><strong>${r.statistics.avgSocial}/10</strong></td></tr>
                         <tr><td>Crisis Alerts</td><td><strong style="color:${r.summary.crisisAlerts>0?'red':'green'}">${r.summary.crisisAlerts}</strong></td></tr>
                     </table>
                     
@@ -546,47 +548,33 @@
                         <strong>Assessment:</strong> ${r.resources.message}
                     </div>
                     
-                    ${r.activeRecommendations && r.activeRecommendations.length > 0 ? `
-                        <h3>💡 Active Recommendations</h3>
-                        ${r.activeRecommendations.map(rec => `
-                            <div class="alert alert-info"><strong>${rec.title}</strong><br>${rec.description}</div>
-                        `).join('')}
-                    ` : ''}
-                    
                     <div class="crisis-banner" style="margin-top:15px;">
                         <strong>📞 Crisis Resources:</strong> ${r.resources.crisis}
                     </div>
                 `;
-            } catch(e) {
-                document.getElementById('reportContent').innerHTML = '<p style="color:red;">Error loading report. Have you logged any moods?</p>';
+            } else {
+                document.getElementById('reportContent').innerHTML = '<p style="color:red;">Error loading report. Have you logged any moods? Is the backend running?</p>';
             }
         }
         
         // ============ RESOURCES ============
         async function loadResources() {
-            try {
-                const res = await fetch('/api/mood/resources', {
-                    headers: {'Authorization':`Bearer ${token}`}
+            const result = await apiCall('/api/mood/resources');
+            
+            if (result.ok && result.data.resources && result.data.resources.length > 0) {
+                let html = '';
+                result.data.resources.forEach(r => {
+                    html += `
+                        <div class="resource-card" onclick="this.querySelector('.content').classList.toggle('hidden')">
+                            <h4>${r.title}</h4>
+                            <p>${r.description} | ⏱️ ${r.duration} min | Type: ${r.type}</p>
+                            <div class="content hidden" style="margin-top:10px;padding:10px;background:#f9f9f9;border-radius:8px;white-space:pre-line;">${r.content}</div>
+                        </div>
+                    `;
                 });
-                const data = await res.json();
-                
-                if (data.resources && data.resources.length > 0) {
-                    let html = '';
-                    data.resources.forEach(r => {
-                        html += `
-                            <div class="resource-card" onclick="this.querySelector('.content').classList.toggle('hidden')">
-                                <h4>${r.title}</h4>
-                                <p>${r.description} | ⏱️ ${r.duration} min | Type: ${r.type}</p>
-                                <div class="content hidden" style="margin-top:10px;padding:10px;background:#f9f9f9;border-radius:8px;white-space:pre-line;">${r.content}</div>
-                            </div>
-                        `;
-                    });
-                    document.getElementById('resourcesList').innerHTML = html;
-                } else {
-                    document.getElementById('resourcesList').innerHTML = '<p>No resources available.</p>';
-                }
-            } catch(e) {
-                document.getElementById('resourcesList').innerHTML = '<p style="color:red;">Error loading resources</p>';
+                document.getElementById('resourcesList').innerHTML = html;
+            } else {
+                document.getElementById('resourcesList').innerHTML = '<p>No resources available or backend not connected.</p>';
             }
         }
     </script>

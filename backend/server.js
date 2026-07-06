@@ -7,9 +7,11 @@ const moodRoutes = require('./routes/mood');
 const reportsRoutes = require('./routes/reports');
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '..', 'frontend')));
+
 app.use('/api/auth', authRoutes);
 app.use('/api/mood', moodRoutes);
 app.use('/api/reports', reportsRoutes);
