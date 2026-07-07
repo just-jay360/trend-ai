@@ -265,9 +265,9 @@ class MentalHealthEngine {
         return {
             message: 'If you\'re experiencing thoughts of self-harm or suicide, please reach out immediately:',
             resources: [
-                { name: 'National Suicide Prevention Lifeline', contact: '988 (US)' },
-                { name: 'Crisis Text Line', contact: 'Text HOME to 741741' },
-                { name: 'Emergency Services', contact: '911 (US) or your local emergency number' },
+                { name: 'National Suicide Prevention Lifeline', contact: '112 (NG)' },
+                { name: 'Crisis Text Line', contact: 'Text HELP to 08062106493' },
+                { name: 'Emergency Services', contact: '112 (NG) or your local emergency number' },
                 { name: 'International Association for Suicide Prevention', contact: 'https://www.iasp.info/resources/Crisis_Centres/' }
             ],
             message2: 'You are not alone. Help is available 24/7.'
