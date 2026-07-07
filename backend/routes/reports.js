@@ -51,7 +51,7 @@ router.get('/mental-health', (req, res) => {
                 activeRecommendations: recs,
                 crisisHistory: alerts,
                 resources: {
-                    crisis: 'Call 988 for help. Text HOME to 741741.',
+                    crisis: 'Call 112 for help. Text HELP to 08062106493.',
                     message: trend === 'declining'
                         ? 'Mood declining - seek support.'
                         : trend === 'improving'
