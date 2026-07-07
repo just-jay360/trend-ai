@@ -1,7 +1,7 @@
 const API_URL =
     location.hostname === "localhost"
         ? "http://localhost:5000/api"
-        : "/api";
+        : "https://YOUR-RENDER-URL.onrender.com/api";
         
 async function testConnection() {
     try {
