@@ -1,7 +1,7 @@
 const API_URL =
     location.hostname === "localhost"
         ? "http://localhost:5500/api"
-        : "https://mindwell-api-op2f.onrender.com";
+        : "https://mindwell-api-op2f.onrender.com/api";
         
 async function testConnection() {
     try {
