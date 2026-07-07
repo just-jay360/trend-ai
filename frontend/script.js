@@ -1,6 +1,6 @@
 const API_URL =
     location.hostname === "localhost"
-        ? "http://localhost:5500/api"
+        ? "http://localhost:5000/api"
         : "https://mindwell-api-op2f.onrender.com/api";
         
 async function testConnection() {
